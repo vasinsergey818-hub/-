@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Разведывательная авиация России | История и современность</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0c12;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 40, 60, 0.3), rgba(0, 0, 0, 0.96));
+            z-index: -2;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            backdrop-filter: blur(4px);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 12, 18, 0.85);
+            z-index: 100;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        .logo i {
+            color: #38bdf8;
+            font-size: 2rem;
+        }
+        .logo span {
+            background: linear-gradient(135deg, #e0f2fe, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #7dd3fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline-section {
+            margin: 60px 0 40px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 32px;
+            padding: 32px;
+            border-left: 4px solid #38bdf8;
+        }
+        .timeline-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+        .timeline-text {
+            color: #cbd5e6;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .timeline-text strong {
+            color: #7dd3fc;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 48px 0 24px 0;
+            border-left: 5px solid #38bdf8;
+            padding-left: 20px;
+        }
+        .era-badge {
+            display: inline-block;
+            background: #1e293b;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 16px;
+            color: #94a3b8;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin: 40px 0;
+        }
+        .card {
+            background: rgba(20, 24, 36, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #38bdf8;
+            box-shadow: 0 25px 40px -12px rgba(56, 189, 248, 0.25);
+        }
+        .card-img {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-color: #1a2a3a;
+        }
+        /* Запасной фон если фото не загрузится */
+        .card-img::before {
+            content: "📸";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        .badge {
+            background: #0f172ad9;
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #bae6fd;
+            border-left: 2px solid #38bdf8;
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            z-index: 2;
+        }
+        .year-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #38bdf8;
+            color: #0a0c12;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+        .card-content {
+            padding: 24px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .card-subtitle {
+            color: #7dd3fc;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        .desc {
+            color: #cbd5e6;
+            margin: 12px 0 16px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .specs {
+            background: #0f111a;
+            border-radius: 20px;
+            padding: 16px;
+            margin: 16px 0 12px;
+        }
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 6px 0;
+            border-bottom: 1px dashed #2d3a5e;
+        }
+        .spec-row:last-child {
+            border: none;
+        }
+        .spec-label {
+            font-weight: 500;
+            color: #94a3b8;
+        }
+        .spec-value {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .footer {
+            text-align: center;
+            padding: 48px 0 32px;
+            margin-top: 60px;
+            border-top: 1px solid #1e293b;
+            color: #5b6e8c;
+            font-size: 0.85rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #0f172a;
+            border-radius: 32px;
+            max-width: 550px;
+            width: 90%;
+            padding: 32px;
+            border: 1px solid #38bdf8;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        .modal-title {
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+        }
+        .modal-year {
+            color: #7dd3fc;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .modal-specs {
+            color: #cbd5e6;
+            line-height: 1.8;
+        }
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.6rem; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .timeline-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<header class="header">
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <i class="fas fa-eye"></i>
+                <span>РАЗВЕД<span style="color:#fff;">АВИА</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#early">Зарождение</a></li>
+                <li><a href="#ww2">Вторая мировая</a></li>
+                <li><a href="#coldwar">Холодная война</a></li>
+                <li><a href="#modern">Современность</a></li>
+                <li><a href="#uav">БПЛА</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="hero">
+        <h1>Разведывательная авиация России<br>сквозь историю</h1>
+        <p>От первых аэропланов с фотокамерами до современных беспилотников — история развития воздушной разведки.</p>
+    </div>
+
+    <div class="timeline-section">
+        <h2><i class="fas fa-history"></i> Как всё начиналось</h2>
+        <div class="timeline-text"><strong>Первые шаги:</strong> Ещё в XIX веке для разведки с воздуха использовали воздушные шары и змеи. В 1911 году в Российской империи на манёврах впервые применили аэропланы для разведки.</div>
+        <div class="timeline-text"><strong>Первая мировая:</strong> Лётчики-наблюдатели вели визуальную разведку и фотографирование позиций противника.</div>
+        <div class="timeline-text"><strong>Вторая мировая:</strong> К 1945 году на воздушное фотографирование приходилось уже более 86% разведывательных вылетов.</div>
+        <div class="timeline-text"><strong>Холодная война:</strong> Эпоха высотных и сверхзвуковых разведчиков — МиГ-25Р, Су-24МР.</div>
+    </div>
+
+    <!-- Зарождение авиаразведки -->
+    <div id="early">
+        <div class="section-title"><i class="fas fa-camera"></i> Зарождение авиаразведки (1910-1930-е)</div>
+        <div class="era-badge">Эпоха первых аэропланов и разведчиков</div>
+        <div class="tech-grid">
+            <!-- Р-5 - советский разведчик 30-х годов - фото с waralbum.ru -->
+            <div class="card" data-title="Р-5" data-year="1930" data-country="СССР" data-specs="• Тип: Многоцелевой разведчик<br>• Двигатель: М-17 (680 л.с.)<br>• Макс. скорость: 230 км/ч<br>• Дальность: 800 км<br>• Экипаж: 2 человека<br>• Вооружение: 3 пулемёта, до 400 кг бомб<br>• Интересный факт: Основной разведчик РККА в 1930-е годы, выпущено более 7000 машин[citation:5]">
+                <div class="card-img" style="background-image: url('https://waralbum.ru/wp-content/uploads/2019/08/6-1-e1564931140816.jpg');">
+                    <div class="year-badge">1930</div>
+                    <div class="badge">Разведчик РККА</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Р-5</div>
+                    <div class="card-subtitle">Основной разведчик РККА 1930-х годов</div>
+                    <div class="desc">Советский многоцелевой самолёт-разведчик. Был основным разведчиком, лёгким бомбардировщиком и штурмовиком в РККА. Использовался до конца войны как связной и транспортный[citation:5]</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Макс. скорость</span><span class="spec-value">230 км/ч</span></div>
+                        <div class="spec-row"><span class="spec-label">Экипаж</span><span class="spec-value">2 человека</span></div>
+                        <div class="spec-row"><span class="spec-label">Выпущено</span><span class="spec-value">более 7000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Вторая мировая война -->
+    <div id="ww2">
+        <div class="section-title"><i class="fas fa-bomb"></i> Вторая мировая война (1941-1945)</div>
+        <div class="era-badge">Массовое применение аэрофоторазведки</div>
+        <div class="tech-grid">
+            <!-- Пе-2Р - фото с waralbum.ru -->
+            <div class="card" data-title="Пе-2Р" data-year="1942" data-country="СССР" data-specs="• Тип: Пикирующий бомбардировщик / разведчик<br>• Двигатели: 2 × ВК-105Р (1100 л.с.)<br>• Макс. скорость: 540 км/ч<br>• Потолок: 8800 м<br>• Экипаж: 3 человека<br>• Фотооборудование: АФА-1, АФА-Б<br>• Интересный факт: Самый массовый советский разведчик войны">
+                <div class="card-img" style="background-image: url('https://waralbum.ru/wp-content/uploads/2014/03/765553.jpg');">
+                    <div class="year-badge">1942</div>
+                    <div class="badge">Фоторазведчик</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Пе-2Р</div>
+                    <div class="card-subtitle">Петляков / Разведчик</div>
+                    <div class="desc">Самый массовый советский разведчик Великой Отечественной войны. Переоборудован из пикирующего бомбардировщика, нёс до 4 фотоаппаратов.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Макс. скорость</span><span class="spec-value">540 км/ч</span></div>
+                        <div class="spec-row"><span class="spec-label">Потолок</span><span class="spec-value">8800 м</span></div>
+                        <div class="spec-row"><span class="spec-label">Фотооборудование</span><span class="spec-value">АФА-1, АФА-Б</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- МБР-2 - фото с waralbum.ru -->
+            <div class="card" data-title="МБР-2" data-year="1935" data-country="СССР" data-specs="• Тип: Морской ближний разведчик<br>• Двигатель: М-34 (750 л.с.)<br>• Макс. скорость: 245 км/ч<br>• Дальность: 1600 км<br>• Экипаж: 3-4 человека<br>• Интересный факт: Самый массовый гидросамолёт в мире на 1941 год">
+                <div class="card-img" style="background-image: url('https://waralbum.ru/wp-content/uploads/2015/12/be-2_mbr-2_15.jpg');">
+                    <div class="year-badge">1935</div>
+                    <div class="badge">Морской разведчик</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">МБР-2</div>
+                    <div class="card-subtitle">Морской ближний разведчик / "Аннушка"</div>
+                    <div class="desc">Самый массовый советский гидросамолёт-разведчик. Состоял на вооружении всех флотов СССР.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Экипаж</span><span class="spec-value">3-4 человека</span></div>
+                        <div class="spec-row"><span class="spec-label">Дальность</span><span class="spec-value">1600 км</span></div>
+                        <div class="spec-row"><span class="spec-label">Бомбовая нагрузка</span><span class="spec-value">600 кг</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Холодная война -->
+    <div id="coldwar">
+        <div class="section-title"><i class="fas fa-rocket"></i> Холодная война (1950-1991)</div>
+        <div class="era-badge">Эпоха сверхзвуковых разведчиков</div>
+        <div class="tech-grid">
+            <!-- МиГ-25Р - фото с waralbum.ru -->
+            <div class="card" data-title="МиГ-25Р" data-year="1969" data-country="СССР" data-specs="• Тип: Сверхзвуковой разведчик<br>• Двигатели: 2 × Р-15Б-300<br>• Макс. скорость: 3000 км/ч (М=2.83)<br>• Потолок: 20700 м<br>• Дальность: 1860 км<br>• Фотооборудование: АФА-6, АФА-8<br>• Интересный факт: Создан как ответ на американские разведчики">
+                <div class="card-img" style="background-image: url('https://waralbum.ru/wp-content/uploads/2020/02/IMG_8480.jpg');">
+                    <div class="year-badge">1969</div>
+                    <div class="badge">Сверхзвуковой разведчик</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">МиГ-25Р</div>
+                    <div class="card-subtitle">"Летающий титан"</div>
+                    <div class="desc">Советский сверхзвуковой разведчик, созданный на базе перехватчика МиГ-25. Мог нести фото- и радиотехническую разведывательную аппаратуру.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Макс. скорость</span><span class="spec-value">3000 км/ч</span></div>
+                        <div class="spec-row"><span class="spec-label">Потолок</span><span class="spec-value">20700 м</span></div>
+                        <div class="spec-row"><span class="spec-label">Материал</span><span class="spec-value">Сталь + титан</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Современность -->
+    <div id="modern">
+        <div class="section-title"><i class="fas fa-satellite-dish"></i> Современные разведчики</div>
+        <div class="era-badge">Цифровая эпоха</div>
+        <div class="tech-grid">
+            <!-- Су-24МР - фото с официального сайта Минобороны РФ -->
+            <div class="card" data-title="Су-24МР" data-year="1983" data-country="Россия" data-specs="• Тип: Фронтовой разведчик<br>• Двигатели: 2 × АЛ-21Ф-3<br>• Макс. скорость: 1650 км/ч<br>• Потолок: 11500 м<br>• Оборудование: РЛС бокового обзора 'Штык', контейнер радиационной разведки М-341 'Эфир-1М'[citation:10]<br>• Интересный факт: Участвовал в учениях 'Запад-2025' и сирийской операции[citation:2]">
+                <div class="card-img" style="background-image: url('https://structure.mil.ru/images/military/army/army_planes/su-24mr.jpg');">
+                    <div class="year-badge">1983</div>
+                    <div class="badge">Фронтовой разведчик</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Су-24МР</div>
+                    <div class="card-subtitle">Фронтовой разведчик ВКС РФ</div>
+                    <div class="desc">Основной фронтовой разведчик ВКС России. Несёт комплекс фото- и радиотехнической разведки. Информация может обрабатываться прямо на борту самолёта в полёте[citation:10]</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Макс. скорость</span><span class="spec-value">1650 км/ч</span></div>
+                        <div class="spec-row"><span class="spec-label">На вооружении</span><span class="spec-value">ВКС РФ</span></div>
+                        <div class="spec-row"><span class="spec-label">Разведоборудование</span><span class="spec-value">Фото + РЛС + ИК</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ил-20М - самолёт радиоэлектронной разведки -->
+            <div class="card" data-title="Ил-20М" data-year="1969" data-country="Россия" data-specs="• Тип: Самолёт радиоэлектронной разведки<br>• Двигатели: 4 × АИ-20М<br>• Скорость: 675 км/ч<br>• Потолок: 10600 м<br>• Дальность: 5400 км<br>• Экипаж: 13-15 человек<br>• Оборудование: РЛС бокового обзора, станции радиоразведки">
+                <div class="card-img" style="background-image: url('https://structure.mil.ru/images/military/army/army_planes/il-20m.jpg');">
+                    <div class="year-badge">1969</div>
+                    <div class="badge">Радиоэлектронная разведка</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Ил-20М</div>
+                    <div class="card-subtitle">Самолёт РЭР</div>
+                    <div class="desc">Самолёт радиоэлектронной разведки (РЭР). Способен вести перехват переговоров, радиолокационных сигналов и радиоэлектронную разведку.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Экипаж</span><span class="spec-value">13-15 человек</span></div>
+                        <div class="spec-row"><span class="spec-label">Дальность</span><span class="spec-value">5400 км</span></div>
+                        <div class="spec-row"><span class="spec-label">На вооружении</span><span class="spec-value">с 1969 года</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- БПЛА -->
+    <div id="uav">
+        <div class="section-title"><i class="fas fa-drone"></i> Беспилотные разведчики (БПЛА)</div>
+        <div class="era-badge">Революция в разведке</div>
+        <div class="tech-grid">
+            <!-- Орлан-10 - основной БПЛА ВС РФ -->
+            <div class="card" data-title="Орлан-10" data-year="2010" data-country="Россия" data-specs="• Тип: Многоцелевой разведывательный БПЛА<br>• Двигатель: Бензиновый (АИ-92)<br>• Макс. скорость: 150 км/ч<br>• Дальность: до 600 км<br>• Время полёта: до 18 часов<br>• Потолок: 5000 м<br>• Интересный факт: Использует обычный бензин, запускается с катапульты">
+                <div class="card-img" style="background-image: url('https://structure.mil.ru/images/military/army/army_drones/orlan-10.jpg');">
+                    <div class="year-badge">2010</div>
+                    <div class="badge">Современный БПЛА</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Орлан-10</div>
+                    <div class="card-subtitle">Основной разведчик ВС РФ</div>
+                    <div class="desc">Самый массовый российский разведывательный БПЛА. Используется для разведки, корректировки артиллерии и ретрансляции. Блестяще показал себя в Сирии и СВО.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Дальность</span><span class="spec-value">до 600 км</span></div>
+                        <div class="spec-row"><span class="spec-label">Время полёта</span><span class="spec-value">до 18 часов</span></div>
+                        <div class="spec-row"><span class="spec-label">Топливо</span><span class="spec-value">АИ-92</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ту-143 Рейс -->
+            <div class="card" data-title="Ту-143 Рейс" data-year="1970" data-country="СССР" data-specs="• Тип: Тактический разведывательный БПЛА<br>• Двигатель: ТРД ТР3-117<br>• Скорость: 950 км/ч<br>• Дальность: 180 км<br>• Выпущено: 950 единиц<br>• Интересный факт: Первый советский серийный разведывательный беспилотник">
+                <div class="card-img" style="background-image: url('https://waralbum.ru/wp-content/uploads/2014/12/tu-143.jpg');">
+                    <div class="year-badge">1970</div>
+                    <div class="badge">Первое поколение БПЛА</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">Ту-143 "Рейс"</div>
+                    <div class="card-subtitle">Первый советский серийный БПЛА</div>
+                    <div class="desc">Первый советский серийный разведывательный беспилотник. Применялся для фоторазведки в тактической глубине. Выпущено 950 машин.</div>
+                    <div class="specs">
+                        <div class="spec-row"><span class="spec-label">Скорость</span><span class="spec-value">950 км/ч</span></div>
+                        <div class="spec-row"><span class="spec-label">Дальность</span><span class="spec-value">180 км</span></div>
+                        <div class="spec-row"><span class="spec-label">Выпущено</span><span class="spec-value">950 ед.</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><i class="fas fa-eye"></i> Разведывательная авиация — «глаза и уши» вооружённых сил.</p>
+        <p style="margin-top: 16px;">© 2025 РАЗВЕДАВИА | История развития воздушной разведки</p>
+        <p style="margin-top: 8px; font-size: 0.7rem;">Фото: Waralbum.ru (архив военной фотографии), structure.mil.ru (Минобороны РФ)</p>
+    </div>
+</footer>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-year" id="modal-year"></div>
+        <div class="modal-specs" id="modal-specs"></div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalYear = document.getElementById('modal-year');
+    const modalSpecs = document.getElementById('modal-specs');
+
+    function openModal(title, year, country, specs) {
+        modalTitle.innerHTML = title;
+        modalYear.innerHTML = `<i class="fas fa-calendar-alt"></i> ${year} год  |  <i class="fas fa-globe"></i> ${country}`;
+        modalSpecs.innerHTML = specs;
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function() {
+            const title = this.getAttribute('data-title');
+            const year = this.getAttribute('data-year');
+            const country = this.getAttribute('data-country');
+            const specs = this.getAttribute('data-specs');
+            openModal(title, year, country, specs);
+        });
+    });
+</script>
+</body>
+</html>
